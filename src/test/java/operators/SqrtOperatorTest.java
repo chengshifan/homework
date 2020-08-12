@@ -16,7 +16,7 @@ public class SqrtOperatorTest {
     public void testAddOperator() throws Exception{
         Stack<String> stack = new Stack<>();
         stack.push("2.0");
-        Stack<String> res = new SqrtOperator().compute(5, stack);
+        Stack<String> res = SqrtOperator.getSqrtOperator().compute(5, stack);
         assertTrue(res.peek().equals("1.4142135623"));
         assertEquals(1, res.size());
     }

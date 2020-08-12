@@ -17,7 +17,7 @@ public class ClearOperatorTest {
         Stack<String> stack = new Stack<>();
         stack.push("1");
         stack.push("2.0");
-        stack = new ClearOperator().compute(7, stack);
+        stack = ClearOperator.getClearOperator().compute(7, stack);
         assertEquals(0, stack.size());
     }
 

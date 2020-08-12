@@ -9,7 +9,20 @@ import java.util.Stack;
  */
 public class SubtractOperator implements BaseOperator<String> {
 
-    public SubtractOperator() {
+    private static SubtractOperator subtractOperator;
+
+    private SubtractOperator() {
+    }
+
+    public static SubtractOperator getSubtractOperator() {
+        if (subtractOperator == null) {
+            synchronized (SubtractOperator.class) {
+                if (subtractOperator == null) {
+                    subtractOperator = new SubtractOperator();
+                }
+            }
+        }
+        return subtractOperator;
     }
 
     @Override

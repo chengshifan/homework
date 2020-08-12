@@ -13,11 +13,11 @@ import static org.junit.Assert.assertTrue;
  */
 public class SubtractOperatorTest {
     @Test
-    public void testAddOperator() throws Exception{
+    public void testAddOperator() throws Exception {
         Stack<String> stack = new Stack<>();
         stack.push("1.0");
         stack.push("2.0");
-        Stack<String> res = new SubtractOperator().compute(9, stack);
+        Stack<String> res = SubtractOperator.getSubtractOperator().compute(9, stack);
         assertTrue(res.peek().equals("-1"));
         assertEquals(1, res.size());
     }

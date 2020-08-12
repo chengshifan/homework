@@ -8,7 +8,21 @@ import java.util.Stack;
  * Created by honestFan on 2020/8/6.
  */
 public class AddOperator implements BaseOperator<String> {
-    public AddOperator() {
+
+    private static AddOperator addOperator;
+
+    private AddOperator() {
+    }
+
+    public static AddOperator getAddOperator() {
+        if (addOperator == null) {
+            synchronized (AddOperator.class) {
+                if (addOperator == null) {
+                    addOperator = new AddOperator();
+                }
+            }
+        }
+        return addOperator;
     }
 
     @Override

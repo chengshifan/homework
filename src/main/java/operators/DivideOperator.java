@@ -9,7 +9,20 @@ import java.util.Stack;
  */
 public class DivideOperator implements BaseOperator<String> {
 
-    public DivideOperator() {
+    private static DivideOperator divideOperator;
+
+    private DivideOperator() {
+    }
+
+    public static DivideOperator getDivideOperator() {
+        if (divideOperator == null) {
+            synchronized (DivideOperator.class) {
+                if (divideOperator == null) {
+                    divideOperator = new DivideOperator();
+                }
+            }
+        }
+        return divideOperator;
     }
 
     @Override

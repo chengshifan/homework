@@ -17,7 +17,7 @@ public class DivideOperatorTest {
         Stack<String> stack = new Stack<>();
         stack.push("1.0");
         stack.push("3.0");
-        Stack<String> res = new DivideOperator().compute(9, stack);
+        Stack<String> res = DivideOperator.getDivideOperator().compute(9, stack);
         assertTrue(res.peek().equals("0.3333333333"));
         assertEquals(1, res.size());
     }

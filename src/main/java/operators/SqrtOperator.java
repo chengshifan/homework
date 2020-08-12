@@ -9,7 +9,20 @@ import java.util.Stack;
  */
 public class SqrtOperator implements BaseOperator<String> {
 
-    public SqrtOperator() {
+    private static SqrtOperator sqrtOperator;
+
+    private SqrtOperator() {
+    }
+
+    public static SqrtOperator getSqrtOperator() {
+        if (sqrtOperator == null) {
+            synchronized (SqrtOperator.class) {
+                if (sqrtOperator == null) {
+                    sqrtOperator = new SqrtOperator();
+                }
+            }
+        }
+        return sqrtOperator;
     }
 
     @Override

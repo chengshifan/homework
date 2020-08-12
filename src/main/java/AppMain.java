@@ -10,10 +10,18 @@ import java.util.Stack;
  * Created by honestFan on 2020/8/6.
  */
 public class AppMain {
+    static BaseOperator addOperator = AddOperator.getAddOperator();
+    static BaseOperator subtractOperator = SubtractOperator.getSubtractOperator();
+    static BaseOperator multipleOperator = MultipleOperator.getMultipleOperator();
+    static BaseOperator sqrtOperator = SqrtOperator.getSqrtOperator();
+    static BaseOperator clearOperator = ClearOperator.getClearOperator();
+    static BaseOperator divideOperator = DivideOperator.getDivideOperator();
+
     public static void main(String[] args) {
         System.out.println("RPN Staring...Please input number or +,-,*,/,sqrt,clean,undo");
         Stack<ArrayList<String>> cache = new Stack<>();
         Stack<String> datas = new Stack<>();
+
         while (true) {
             Scanner scanner = new Scanner(System.in);
             String data = scanner.nextLine();
@@ -32,19 +40,19 @@ public class AppMain {
                         pos += cur.length() + 1;
                     } else {
                         if (cur.equals("+")) {
-                            datas = new AddOperator().compute(pos, datas);
+                            datas = addOperator.compute(pos, datas);
                         } else if (cur.equals("-")) {
-                            datas = new SubtractOperator().compute(pos,datas);
+                            datas = subtractOperator.compute(pos, datas);
                         } else if (cur.equals("*")) {
-                            datas = new MultipleOperator().compute(pos,datas);
+                            datas = multipleOperator.compute(pos, datas);
                         } else if (cur.equals("/")) {
-                            datas = new DivideOperator().compute(pos,datas);
+                            datas = divideOperator.compute(pos, datas);
                         } else if (cur.equals("sqrt")) {
-                            datas = new SqrtOperator().compute(pos,datas);
+                            datas = sqrtOperator.compute(pos, datas);
                         } else if (cur.equals("undo")) {
                             datas = CacheHandler.handleUndo(cache);
                         } else if (cur.equals("clear")) {
-                            datas = new ClearOperator().compute(pos,datas);
+                            datas = clearOperator.compute(pos, datas);
                         } else {
                             System.err.println("Unknown operator");
                             break;

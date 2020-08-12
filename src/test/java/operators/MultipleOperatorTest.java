@@ -17,7 +17,7 @@ public class MultipleOperatorTest {
         Stack<String> stack = new Stack<>();
         stack.push("1.0");
         stack.push("2.0");
-        Stack<String> res = new MultipleOperator().compute(9, stack);
+        Stack<String> res = MultipleOperator.getMultipleOperator().compute(9, stack);
         assertTrue(res.peek().equals("2"));
         assertEquals(1, res.size());
     }
