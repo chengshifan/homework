@@ -17,7 +17,7 @@ public class OutputHandler {
             if (end - begin > 10) {
                 String newRes = String.format("%.11f", Double.valueOf(res)).substring(0, String.format("%.11f", Double.valueOf(res)).length() - 1);
                 if (newRes.endsWith("0")) {
-                   return handleOutput(newRes);
+                    return handleOutput(newRes);
                 }
                 return newRes;
             } else {
@@ -28,6 +28,10 @@ public class OutputHandler {
                 return newRes;
             }
         }
+    }
+
+    public static void handleStack(String result, Stack<String> stack) {
+        stack.push(handleOutput(result));
     }
 
     public static void printStack(Stack<String> stack) {

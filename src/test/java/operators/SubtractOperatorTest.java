@@ -2,10 +2,10 @@ package operators;
 
 
 import org.junit.Test;
+import utils.OutputHandler;
 
-import java.util.Stack;
+import java.util.Arrays;
 
-import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -13,13 +13,10 @@ import static org.junit.Assert.assertTrue;
  */
 public class SubtractOperatorTest {
     @Test
-    public void testAddOperator() throws Exception {
-        Stack<String> stack = new Stack<>();
-        stack.push("1.0");
-        stack.push("2.0");
-        Stack<String> res = SubtractOperator.getSubtractOperator().compute(9, stack);
-        assertTrue(res.peek().equals("-1"));
-        assertEquals(1, res.size());
+    public void testSubtractOperator() {
+        String res = SubtractOperator.getSubtractOperator().compute(Arrays.asList("1.0", "2.0"));
+        res = OutputHandler.handleOutput(res);
+        assertTrue(res.equals("-1"));
     }
 
 }

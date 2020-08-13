@@ -1,8 +1,6 @@
 package operators;
 
-import utils.OutputHandler;
-
-import java.util.Stack;
+import java.util.List;
 
 /**
  * Created by honestFan on 2020/8/6.
@@ -26,14 +24,10 @@ public class MultipleOperator implements BaseOperator<String> {
     }
 
     @Override
-    public Stack<String> compute(Integer pos, Stack<String> s) throws Exception {
-        if (s == null || s.size() < 2)
-            throw new Exception("operator * (position: " + pos + "): insufficient parameters");
-        Double num1 = Double.valueOf(s.pop());
-        Double num2 = Double.valueOf(s.pop());
-        String res = num1 * num2 + "";
-        s.push(OutputHandler.handleOutput(res));
-        return s;
+    public String compute(List<String> datas) {
+        Double num1 = Double.valueOf(datas.get(0));
+        Double num2 = Double.valueOf(datas.get(1));
+        return num1 * num2 + "";
     }
 
 

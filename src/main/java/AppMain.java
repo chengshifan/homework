@@ -1,8 +1,10 @@
 import operators.*;
 import utils.CacheHandler;
+import utils.InputHandler;
 import utils.OutputHandler;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -14,14 +16,12 @@ public class AppMain {
     static BaseOperator subtractOperator = SubtractOperator.getSubtractOperator();
     static BaseOperator multipleOperator = MultipleOperator.getMultipleOperator();
     static BaseOperator sqrtOperator = SqrtOperator.getSqrtOperator();
-    static BaseOperator clearOperator = ClearOperator.getClearOperator();
     static BaseOperator divideOperator = DivideOperator.getDivideOperator();
 
     public static void main(String[] args) {
         System.out.println("RPN Staring...Please input number or +,-,*,/,sqrt,clean,undo");
         Stack<ArrayList<String>> cache = new Stack<>();
-        Stack<String> datas = new Stack<>();
-
+        Stack<String> stack = new Stack<>();
         while (true) {
             Scanner scanner = new Scanner(System.in);
             String data = scanner.nextLine();
@@ -34,25 +34,27 @@ public class AppMain {
             Integer n = dataArr.length;
             while (index < n) {
                 String cur = dataArr[index];
+                String result = null;
                 try {
                     if (cur.matches("^[-+]?[0-9]+(\\.[0-9]+)?$")) {
-                        datas.push(cur);
+                        stack.push(cur);
                         pos += cur.length() + 1;
                     } else {
+                        List<String> datas = InputHandler.getData(stack, cur, pos);
                         if (cur.equals("+")) {
-                            datas = addOperator.compute(pos, datas);
+                            result = (String) addOperator.compute(datas);
                         } else if (cur.equals("-")) {
-                            datas = subtractOperator.compute(pos, datas);
+                            result = (String) subtractOperator.compute(datas);
                         } else if (cur.equals("*")) {
-                            datas = multipleOperator.compute(pos, datas);
+                            result = (String) multipleOperator.compute(datas);
                         } else if (cur.equals("/")) {
-                            datas = divideOperator.compute(pos, datas);
+                            result = (String) divideOperator.compute(datas);
                         } else if (cur.equals("sqrt")) {
-                            datas = sqrtOperator.compute(pos, datas);
+                            result = (String) sqrtOperator.compute(datas);
                         } else if (cur.equals("undo")) {
-                            datas = CacheHandler.handleUndo(cache);
+                            stack = CacheHandler.handleUndo(cache);
                         } else if (cur.equals("clear")) {
-                            datas = clearOperator.compute(pos, datas);
+                            stack.clear();
                         } else {
                             System.err.println("Unknown operator");
                             break;
@@ -64,13 +66,16 @@ public class AppMain {
                     break;
                 }
 
+                if (result != null) {
+                    OutputHandler.handleStack(result, stack);
+                }
                 if (!cur.equals("undo")) {
-                    CacheHandler.handleCache(cache, new ArrayList<>(datas));
+                    CacheHandler.handleCache(cache, new ArrayList<>(stack));
                 }
                 index++;
 
             }
-            OutputHandler.printStack(datas);
+            OutputHandler.printStack(stack);
         }
     }
 }

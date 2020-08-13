@@ -2,10 +2,10 @@ package operators;
 
 
 import org.junit.Test;
+import utils.OutputHandler;
 
-import java.util.Stack;
+import java.util.Arrays;
 
-import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -13,13 +13,10 @@ import static org.junit.Assert.assertTrue;
  */
 public class DivideOperatorTest {
     @Test
-    public void testAddOperator() throws Exception{
-        Stack<String> stack = new Stack<>();
-        stack.push("1.0");
-        stack.push("3.0");
-        Stack<String> res = DivideOperator.getDivideOperator().compute(9, stack);
-        assertTrue(res.peek().equals("0.3333333333"));
-        assertEquals(1, res.size());
+    public void testDivideOperator() {
+        String res = DivideOperator.getDivideOperator().compute(Arrays.asList("1", "3"));
+        res = OutputHandler.handleOutput(res);
+        assertTrue(res.equals("0.3333333333"));
     }
 
 }

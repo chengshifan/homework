@@ -1,12 +1,12 @@
 package operators;
 
-import java.util.Stack;
+import java.util.List;
 
 /**
  * Created by honestFan on 2020/8/6.
  */
-public interface BaseOperator<T>{
+public interface BaseOperator<T> {
 
-    Stack<T> compute(Integer pos, Stack<T> s) throws Exception;
+    T compute(List<T> datas) throws Exception;
 
 }
